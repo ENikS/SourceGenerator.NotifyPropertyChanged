@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generator", "Generator\Gene
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit.Tests", "Tests\UnitTests\Unit.Tests.csproj", "{CC184E57-BE43-469C-9F08-2C96D3FAD932}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Distribution", "Distribution", "{EF1F3D63-1857-4D70-890F-C08AAEFC0624}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6464CF92-DE64-40CC-B612-81D99F0B28AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4C9B592D-A41C-451B-8344-AB9E9EABFFFD} = {EF1F3D63-1857-4D70-890F-C08AAEFC0624}
+		{0960BC39-7773-4966-8CD1-D17F6B7FC742} = {EF1F3D63-1857-4D70-890F-C08AAEFC0624}
+		{CC184E57-BE43-469C-9F08-2C96D3FAD932} = {6464CF92-DE64-40CC-B612-81D99F0B28AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {29C911F7-E49F-455B-B11D-0F90D6DEE58B}

@@ -11,10 +11,10 @@
     <PackageId>SourceGenerator.NotifyPropertyChanged</PackageId>
     <PackageVersion>1.0.0.0</PackageVersion>
     <Authors>ENikS</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/ENikS/SourceGenerator.NotifyPropertyChanged/blob/main/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ENikS/SourceGenerator.NotifyPropertyChanged</PackageProjectUrl>
+    <!--<PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>-->
+    <RepositoryUrl>https://github.com/ENikS/SourceGenerator.NotifyPropertyChanged</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>SourceGenerator.NotifyPropertyChanged</Description>
     <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
