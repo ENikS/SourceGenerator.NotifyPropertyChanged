@@ -34,8 +34,4 @@
     <ProjectReference Include="..\..\Generator\Generator.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

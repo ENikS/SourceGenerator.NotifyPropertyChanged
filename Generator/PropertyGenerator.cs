@@ -1,8 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
-using System.IO;
-using System.Reflection;
-using System.Text;
 
 namespace SourceGenerator.NotifyPropertyChanged
 {
@@ -15,7 +11,7 @@ namespace SourceGenerator.NotifyPropertyChanged
 
         public void Execute(GeneratorExecutionContext context)
         {
-            SyntaxReceiver? receiver = context.SyntaxReceiver as SyntaxReceiver;
+            SyntaxReceiver? receiver = context.SyntaxContextReceiver as SyntaxReceiver;
             if ((receiver?.Count ?? 0) == 0) return;
 
             //Parser? p = new Parser(context.Compilation, context.ReportDiagnostic, context.CancellationToken);
