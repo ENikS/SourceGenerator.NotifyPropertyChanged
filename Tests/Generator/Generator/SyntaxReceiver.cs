@@ -16,7 +16,7 @@ namespace Unity.Precompiler.Generators.Tests
         [DataRow("public struct TypeName"        )]
         [DataRow("public partial class TypeName" )]
         [DataRow("public partial struct TypeName")]
-        [TestMethod, TestProperty(TestPropertyName, SyntaxReceiver)]
+        [TestMethod, TestProperty(TestingConst, SyntaxReceiver)]
         public async Task NoInterface(string declaration)
         {
             const string pattern = @"
@@ -52,7 +52,7 @@ namespace Unity.Precompiler.Generators.Tests
         [DataRow("class TypeName : INotifyPropertyChanged")]
         [DataRow("public class TypeName : INotifyPropertyChanged")]
         [DataRow("public partial class TypeName : INotifyPropertyChanged")]
-        [TestMethod, TestProperty(TestPropertyName, SyntaxReceiver)]
+        [TestMethod, TestProperty(TestingConst, SyntaxReceiver)]
         public async Task IncorrectInterface(string declaration)
         {
             const string pattern = @"
@@ -89,7 +89,7 @@ namespace Unity.Precompiler.Generators.Tests
         [DataRow("class TypeName : {|#0:INotifyPropertyChanged|}")]
         [DataRow("public class TypeName : {|#0:INotifyPropertyChanged|}")]
 
-        [TestMethod, TestProperty(TestPropertyName, SyntaxReceiver)]
+        [TestMethod, TestProperty(TestingConst, SyntaxReceiver)]
         public async Task NoPartialKeyword(string declaration)
         {
             const string pattern = @"

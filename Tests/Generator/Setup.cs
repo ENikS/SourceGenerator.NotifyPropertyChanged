@@ -15,7 +15,7 @@ namespace Unity.Precompiler.Generators.Tests
     {
         #region Constants
 
-        protected const string TestPropertyName  = "Testing";
+        protected const string TestingConst  = "Testing";
         protected const string PropertyGeneratorName = nameof(PropertyGenerator);
         protected const string SyntaxReceiver = nameof(PropertyGenerator.SyntaxReceiver);
 
@@ -46,7 +46,7 @@ namespace Unity.Precompiler.Generators.Tests
 
         #region Tests
 
-        [TestMethod, TestProperty(TestPropertyName, nameof(CSharpSourceGeneratorTest<PropertyGenerator>))]
+        [TestMethod, TestProperty(TestingConst, nameof(CSharpSourceGeneratorTest<PropertyGenerator>))]
         public async Task Baseline() => await new VerifyCS().RunAsync();
 
         #endregion
