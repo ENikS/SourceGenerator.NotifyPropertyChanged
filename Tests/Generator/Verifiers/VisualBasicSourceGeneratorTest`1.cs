@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.VisualBasic;
 using System.Collections.Immutable;
 
-namespace Unity.Precompiler.Generators.Tests
+namespace Generator.UnityTests
 {
     public class VisualBasicSourceGeneratorTest<TSourceGenerator> : SourceGeneratorTestBase<TSourceGenerator>
             where TSourceGenerator : ISourceGenerator, new()

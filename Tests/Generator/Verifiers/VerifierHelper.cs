@@ -2,12 +2,8 @@
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Immutable;
-#if NET472
-using Microsoft.Practices.Unity;
-#else
-#endif
 
-namespace Unity.Precompiler.Generators.Tests
+namespace Generator.UnityTests
 {
     internal static class VerifierHelper
     {

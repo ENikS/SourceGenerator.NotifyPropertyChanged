@@ -1,13 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VerifyCS = Unity.Precompiler.Generators.Tests.CSharpSourceGeneratorTest<SourceGenerator.NotifyPropertyChanged.PropertyGenerator>;
 
-namespace Unity.Precompiler.Generators.Tests
+namespace Generator.UnitTests
 {
     public partial class PropertyGeneratorTests
     {
-        public static IEnumerable<object[]> Declarations_Test_Data
+        public static IEnumerable<object[]> DeclarationWithInterface_Test_Data
         {
             get
             {
@@ -22,12 +21,12 @@ namespace Unity.Precompiler.Generators.Tests
         /// <summary>
         /// Test declarations with interfaces and keyword
         /// </summary>
-        [DynamicData(nameof(Declarations_Test_Data))]
-        [TestMethod, TestProperty(TestingConst, PropertyGeneratorName)]
+        [DynamicData(nameof(DeclarationWithInterface_Test_Data))]
+        [TestMethod, TestProperty(TestingConst, SingleTargetProp)]
         public async Task WithKeywordAndInterface(string declaration)
         {
-            const string pattern = @"
-
+            // Arrange
+            verifyCS.TestCode = declarationRegex.Replace(@" // Test source
             using System;
             using System.Collections.Generic;
             using System.Linq;
@@ -41,23 +40,22 @@ namespace Unity.Precompiler.Generators.Tests
                 <declaration>
                 {   
                 }
-            }";
-
-            await new VerifyCS
-            {
-                TestCode = declarationRegex.Replace(pattern, declaration),
-            }.RunAsync();
+            }", 
+            declaration);
+            
+            // Verify
+            await verifyCS.RunAsync();
         }
 
         /// <summary>
         /// Test declarations with interfaces and keyword
         /// </summary>
-        [DynamicData(nameof(Declarations_Test_Data))]
-        [TestMethod, TestProperty(TestingConst, PropertyGeneratorName)]
+        [DynamicData(nameof(DeclarationWithInterface_Test_Data))]
+        [TestMethod, TestProperty(TestingConst, SingleTargetProp)]
         public async Task WithImplementedInterface(string declaration)
         {
-            const string pattern = @"
-
+            // Arrange
+            verifyCS.TestCode = declarationRegex.Replace(@" // Test source
             using System;
             using System.Collections.Generic;
             using System.Linq;
@@ -72,12 +70,11 @@ namespace Unity.Precompiler.Generators.Tests
                 {   
                     public event PropertyChangedEventHandler PropertyChanged;
                 }
-            }";
+            }", 
+            declaration);
 
-            await new VerifyCS
-            {
-                TestCode = declarationRegex.Replace(pattern, declaration),
-            }.RunAsync();
+            // Verify
+            await verifyCS.RunAsync();
         }
 
     }

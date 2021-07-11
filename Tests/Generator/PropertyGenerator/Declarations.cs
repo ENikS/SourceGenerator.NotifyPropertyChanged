@@ -1,9 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using VerifyCS = Unity.Precompiler.Generators.Tests.CSharpSourceGeneratorTest<SourceGenerator.NotifyPropertyChanged.PropertyGenerator>;
 
-namespace Unity.Precompiler.Generators.Tests
+namespace Generator.UnitTests
 {
     public partial class PropertyGeneratorTests
     {
@@ -11,16 +10,16 @@ namespace Unity.Precompiler.Generators.Tests
         /// Test declarations with no interface
         /// </summary>
         [DataRow("class TypeName")]
-        [DataRow("struct TypeName"               )]
-        [DataRow("public class TypeName"         )]
-        [DataRow("public struct TypeName"        )]
-        [DataRow("public partial class TypeName" )]
+        [DataRow("struct TypeName")]
+        [DataRow("public class TypeName")]
+        [DataRow("public struct TypeName")]
+        [DataRow("public partial class TypeName")]
         [DataRow("public partial struct TypeName")]
-        [TestMethod, TestProperty(TestingConst, SyntaxReceiver)]
+        [TestMethod, TestProperty(TestingConst, SingleTargetProp)]
         public async Task NoInterface(string declaration)
         {
-            const string pattern = @"
-
+            // Arrange
+            verifyCS.TestCode = declarationRegex.Replace(@" // Test source
             using System;
             using System.Collections.Generic;
             using System.Linq;
@@ -34,12 +33,11 @@ namespace Unity.Precompiler.Generators.Tests
                 <declaration>
                 {   
                 }
-            }";
-             
-            await new VerifyCS
-            {
-                TestCode = declarationRegex.Replace(pattern, declaration),
-            }.RunAsync();
+            }",
+            declaration);
+
+            // Verify
+            await verifyCS.RunAsync();
         }
 
 
@@ -52,11 +50,11 @@ namespace Unity.Precompiler.Generators.Tests
         [DataRow("class TypeName : INotifyPropertyChanged")]
         [DataRow("public class TypeName : INotifyPropertyChanged")]
         [DataRow("public partial class TypeName : INotifyPropertyChanged")]
-        [TestMethod, TestProperty(TestingConst, SyntaxReceiver)]
+        [TestMethod, TestProperty(TestingConst, SingleTargetProp)]
         public async Task IncorrectInterface(string declaration)
         {
-            const string pattern = @"
-
+            // Arrange
+            verifyCS.TestCode = declarationRegex.Replace(@" // Test source
             using System;
             using System.Collections.Generic;
             using System.Linq;
@@ -75,12 +73,11 @@ namespace Unity.Precompiler.Generators.Tests
                 <declaration>
                 {   
                 }
-            }";
+            }",
+            declaration);
 
-            await new VerifyCS
-            {
-                TestCode = declarationRegex.Replace(pattern, declaration),
-            }.RunAsync();
+            // Verify
+            await verifyCS.RunAsync();
         }
 
         /// <summary>
@@ -89,11 +86,11 @@ namespace Unity.Precompiler.Generators.Tests
         [DataRow("class TypeName : {|#0:INotifyPropertyChanged|}")]
         [DataRow("public class TypeName : {|#0:INotifyPropertyChanged|}")]
 
-        [TestMethod, TestProperty(TestingConst, SyntaxReceiver)]
+        [TestMethod, TestProperty(TestingConst, SingleTargetProp)]
         public async Task NoPartialKeyword(string declaration)
         {
-            const string pattern = @"
-
+            // Arrange
+            verifyCS.TestCode = declarationRegex.Replace(@" // Test source
             using System;
             using System.Collections.Generic;
             using System.Linq;
@@ -107,18 +104,16 @@ namespace Unity.Precompiler.Generators.Tests
                 <declaration>
                 {   
                 }
-            }";
+            }", declaration);
 
-            await new VerifyCS
-            {
-                TestCode = declarationRegex.Replace(pattern, declaration),
-                ExpectedDiagnostics =
-                {
-                    DiagnosticResult.CompilerError("CS0535")
-                                    .WithLocation(0)
-                                    .WithArguments("ConsoleApplication1.TypeName", "System.ComponentModel.INotifyPropertyChanged.PropertyChanged")
-                },
-            }.RunAsync();
+            // Diagnostics
+            verifyCS.ExpectedDiagnostics.Add(
+                DiagnosticResult.CompilerError("CS0535")
+                                .WithLocation(0)
+                                .WithArguments("ConsoleApplication1.TypeName", "System.ComponentModel.INotifyPropertyChanged.PropertyChanged"));
+
+            // Verify
+            await verifyCS.RunAsync();
         }
     }
 }

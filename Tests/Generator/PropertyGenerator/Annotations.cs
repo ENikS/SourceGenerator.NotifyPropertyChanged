@@ -1,19 +1,17 @@
-﻿using Microsoft.CodeAnalysis.Testing;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using VerifyCS = Unity.Precompiler.Generators.Tests.CSharpSourceGeneratorTest<SourceGenerator.NotifyPropertyChanged.PropertyGenerator>;
 
-namespace Unity.Precompiler.Generators.Tests
+namespace Generator.UnitTests
 {
     public partial class PropertyGeneratorTests
     {
         [DataRow("string")]
         [DataRow("private string")]
-        [TestMethod, TestProperty(TestingConst, SyntaxReceiver)]
+        [TestMethod, TestProperty(TestingConst, SingleTargetProp)]
         public async Task WithAttribute(string declaration)
         {
-            const string pattern = @"
-
+            // Arrange
+            verifyCS.TestCode = declarationRegex.Replace(@" // Test source
             using System;
             using System.Collections.Generic;
             using System.Linq;
@@ -29,12 +27,11 @@ namespace Unity.Precompiler.Generators.Tests
                     [NotifyPropertyChanged]
                     <declaration> field;
                 }
-            }";
-             
-            await new VerifyCS
-            {
-                TestCode = declarationRegex.Replace(pattern, declaration),
-            }.RunAsync();
+            }",
+            declaration);
+
+            // Verify
+            await verifyCS.RunAsync();
         }
     }
 }

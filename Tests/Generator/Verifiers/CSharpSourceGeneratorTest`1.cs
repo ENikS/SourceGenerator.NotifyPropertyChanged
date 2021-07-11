@@ -1,18 +1,12 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using SourceGenerator.NotifyPropertyChanged;
 using System.Collections.Immutable;
 
-namespace Unity.Precompiler.Generators.Tests
+namespace Generator.UnityTests
 {
     public class CSharpSourceGeneratorTest<TSourceGenerator> : SourceGeneratorTestBase<TSourceGenerator>
         where TSourceGenerator : ISourceGenerator, new()
     {
-        public CSharpSourceGeneratorTest()
-        {
-            TestState.GeneratedSources.Add((typeof(PropertyGenerator), PropertyGenerator.ResourceName, GeneratedAttributeSource));
-        }
-
         public override string Language => LanguageNames.CSharp;
 
         protected override string DefaultFileExt => "cs";
