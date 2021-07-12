@@ -11,8 +11,8 @@ namespace SourceGenerator.NotifyPropertyChanged
     {
         #region Constants
 
-        public const string AttributeName      = "NotifyPropertyChanged";
-        public const string AttributeNameLong  = AttributeName + "Attribute";
+        public const string AttributeName = "NotifyPropertyChanged";
+        public const string AttributeNameLong = AttributeName + "Attribute";
         public const string AttributeNamespace = "SourceGenerator.NotifyPropertyChanged";
 
         #endregion
@@ -24,10 +24,11 @@ namespace SourceGenerator.NotifyPropertyChanged
         {
             foreach (var symbol in context.Parse())
             {
-                var name = $"{symbol}.Generated.cs";
                 var source = symbol.Emit();
+                if (source is null) continue;
 
-                context.AddSource(name, source);
+                context.AddSource($"{symbol.Namespace}.{symbol.Name}.cs",
+                                  SourceText.From(source, Encoding.UTF8));
             }
         }
 
@@ -48,14 +49,12 @@ namespace SourceGenerator.NotifyPropertyChanged
         private void OnPostInitialize(GeneratorPostInitializationContext context)
         {
             var assembly = GetType().Assembly;
+            var name = assembly.GetManifestResourceNames().First(n => n.EndsWith("Attribute.cs"));
 
-            using Stream stream = assembly.GetManifestResourceStream(
-                assembly.GetManifestResourceNames().First(n => n.EndsWith("Attribute.cs")));
-
+            using Stream stream = assembly.GetManifestResourceStream(name);
             using StreamReader reader = new(stream);
 
             var source = SourceText.From(reader.ReadToEnd(), Encoding.UTF8);
-
             context.AddSource($"Generated.{AttributeNameLong}.cs", source);
         }
 

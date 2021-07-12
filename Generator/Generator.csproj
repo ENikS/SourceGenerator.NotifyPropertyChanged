@@ -12,6 +12,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Templates\Event.txt" />
+    <None Remove="Templates\Preamble.txt" />
+    <None Remove="Templates\Property.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\Property.txt" />
+    <EmbeddedResource Include="Templates\Event.txt" />
+    <EmbeddedResource Include="Templates\Preamble.txt" />
+    <EmbeddedResource Include="Templates\Attribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.10.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
       <PrivateAssets>all</PrivateAssets>
@@ -21,15 +34,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Analyzers\Analyzers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Resources.Designer.cs" DesignTime="True" AutoGen="True" DependentUpon="Resources.resx" />
-    <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Attribute.cs" />
   </ItemGroup>
 
 </Project>

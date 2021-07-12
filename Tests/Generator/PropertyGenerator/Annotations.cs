@@ -18,13 +18,12 @@ namespace Generator.UnitTests
             using System.Text;
             using System.Threading.Tasks;
             using System.Diagnostics;
-            using SourceGenerator.NotifyPropertyChanged;
 
             namespace ConsoleApplication1
             {
                 public class TypeName
                 {   
-                    [NotifyPropertyChanged]
+                    [SourceGenerator.NotifyPropertyChanged.NotifyPropertyChanged]
                     <declaration> field;
                 }
             }",

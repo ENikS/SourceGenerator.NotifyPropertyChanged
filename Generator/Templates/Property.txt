@@ -1,0 +1,9 @@
+﻿		public {0} {1}
+		{{
+			get => {2};
+			set
+			{{ 
+				{2} = value;
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("{1}"));
+			}}
+		}}

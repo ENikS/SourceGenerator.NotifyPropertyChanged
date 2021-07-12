@@ -1,0 +1,5 @@
+﻿            
+                // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                #pragma warning disable CS8632 
+                public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+                #pragma warning restore CS8632
